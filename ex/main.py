@@ -8,3 +8,9 @@ e = somar(
     b = random.randint(0,1000)
 )
 print(e)
+
+for i in range(1):
+    print(str(input('Qual o seu nome: ')))
+print(
+    
+)
