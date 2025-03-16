@@ -57,8 +57,3 @@
             ######ex05######
 
 
-x = int(input('Digite um numero: '))
-
-for i in range(1):
-    if i 
-
