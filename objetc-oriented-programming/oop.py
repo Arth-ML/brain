@@ -4,11 +4,7 @@
 ## the class thery are terms abstract where can we idealize them.
 ## Objects are concrete terms that we can see
 
-CURRENCY_NAME = {
-    'dolar': 'Dollar of United States',
-    'BRL': 'Real'
-}
-
+from data import CURRENCY_NAME, EXCHANGE_RATES
 
 class Currency:
     def __init__(self, value, code):  
@@ -20,7 +16,7 @@ class Currency:
         return f'{self.value:.2f} {self.code}'
     
     def __eq__(self, rhs): #Equality comparation
-        if self.code == rhs.code and self.value == rhs.value:
+        if self.code == rhs.code:
             return 'Equality Currency' or True
         else:
             return 'The currency is not equal' or False
@@ -28,7 +24,9 @@ class Currency:
     def __gt__(self, rhs): #The method __gt__ compare bigger and smaller 
         if self.code == rhs.code:
             return self.value > rhs.value
-        raise ValueError('Coins must be from the some country')
+        return self > rhs.convert(self.code)
+    
+    # raise ValueError('Coins must be from the some country')
     
     def __ge__(self, rhs): #The method __ge__ compare less than or equal 
         if self.code == self.code:
@@ -48,26 +46,18 @@ class Currency:
         if isinstance(rhs, int) or isinstance(rhs, float):
             return Currency(rhs * self.value, self.value)
         raise ValueError(f'{rhs} deve ser um NUMERO')
+    
+    def convert(self, to_code):
+        to_code == to_code.upper()
+        rate = EXCHANGE_RATES[self.code][to_code]
+        return Currency(rate * self.value, to_code)
+
         
     
 if __name__ == '__main__':
-    moeda = Currency(54, "BRL") #Atributed value on value and code  
-    moeda_two = Currency(51, 'BRL')
-    print(moeda)
-    print(moeda_two)
-    print(moeda == moeda_two)
-    print(moeda <= moeda_two )
-    print(moeda + moeda_two)
-    print(moeda - moeda_two)
+    moeda1 = Currency(10, 'USD')
+    moeda2 = Currency(50, 'BRL')
+    print(moeda1)
+    print(moeda1.convert('BRL'))
 
-
-
-
-
-
-
-
-
-# print(moeda.value)
-# print(moeda.code)
-# print('Name of currency:', CURRENCY_NAME[moeda.code])
+    print(moeda1 > moeda2)
