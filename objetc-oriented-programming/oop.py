@@ -4,6 +4,8 @@
 ## the class thery are terms abstract where can we idealize them.
 ## Objects are concrete terms that we can see
 
+#From programação Dinanima, programação Orientada a objetos.
+
 from data import CURRENCY_NAME, EXCHANGE_RATES
 
 class Currency:
@@ -37,17 +39,17 @@ class Currency:
             return Currency(self.value + rhs.value,
                             self.code)
     
-    def __sub__(self, rhs):
+    def __sub__(self, rhs): #The method sub value
         if self.code == rhs.code:
             return Currency(self.value - rhs.value, 
                             self.code)
     
-    def __mul__(self, rhs):
+    def __mul__(self, rhs): #The method mult values
         if isinstance(rhs, int) or isinstance(rhs, float):
             return Currency(rhs * self.value, self.value)
         raise ValueError(f'{rhs} deve ser um NUMERO')
     
-    def convert(self, to_code):
+    def convert(self, to_code): #Function responible for converting values
         to_code == to_code.upper()
         rate = EXCHANGE_RATES[self.code][to_code]
         return Currency(rate * self.value, to_code)
