@@ -29,9 +29,6 @@ class Brazil():
 
 
 
-
-
-
     def votes_states(self, president, vote):
 
         self.voteStates[president] = {
@@ -74,7 +71,8 @@ if __name__ == '__main__':
     brasil_election = Brazil()
     brasil_country = Brazil()
     brasil_chooses = Brazil()
-    n_states = 5
+    n_states = 3
+
 
     for i in range(n_states):
         state = str(input('Enter your states: '))
@@ -99,9 +97,9 @@ if __name__ == '__main__':
 
         
     print('Info of states')
-    # print(brasil_election)
-    # print(brasil_country)
-    print(brasil)
+    print(brasil_election)
+    print(brasil_country)
+ 
     
 
 
