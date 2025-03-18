@@ -2,6 +2,7 @@
 # ##Create of states
 # Created electoral system
 # Created a system for choosing the president
+# Containing votes for countrt and states 
 
 import random
 
@@ -10,8 +11,10 @@ class Brazil:
     def __init__(self):
         self.states = {}
         self.VoteElection = {}  # Testing vote separation
+        self.voteCountry = [] # list containing votes sum the country
         self.Cpresident = {} # Created for dicionary the president
         self.candidates = [] #The list containig candidates
+        self.country = [] #List containing votes the country
 
 
     def add_states(self, state, population, vote, candidate): ## Add population and votes
@@ -34,6 +37,9 @@ class Brazil:
               'President_two': valid_votes_two
          }
 
+    def test(self, country, e) :
+         self.voteCountry[country] = e
+
     def __str__(self):
         state_info = '\n'.join(
             f"State: {state}; Population: {info['Population']: .6f}; Vote: {info['Vote']:.5f}; Candidate: {info['Candidate']}" 
@@ -53,7 +59,8 @@ class Brazil:
 
 if __name__ == '__main__':
     brasil = Brazil()
-    n = 5
+    n = 1
+    t = 0
 
     for i in range(n):
         state = str(input('What is your state: '))
@@ -67,6 +74,17 @@ if __name__ == '__main__':
         vote = float(population * random.random())
         valid_votes = float(population * random.random())
         valid_votes_two = float((population - valid_votes) * random.random())
+        
+        brasil.country.append(valid_votes)
+        brasil.country.append(valid_votes_two)
+
+
+        for c in brasil.country:
+             t += c
+             print(f'test {t}')
+        
+
+       
 
 
         president_one = random.choice(candidate)
@@ -75,12 +93,14 @@ if __name__ == '__main__':
 
         brasil.add_states(state, population, vote, candidate )
         brasil.Election(state, valid_votes, valid_votes_two)
+        brasil.test('test votes', t)
        
 
 
         if len(brasil.candidates) >= 2:
              president_one, president_two = random.sample(brasil.candidates, 2)
              brasil.presidented('Candidate choosing', president_one, president_two)
+        
 
     print('Info of states:')
     print(brasil)
