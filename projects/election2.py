@@ -11,7 +11,7 @@ class Brazil:
     def __init__(self):
         self.states = {}
         self.VoteElection = {}  # Testing vote separation
-        self.voteCountry = [] # list containing votes sum the country
+        self.voteCountry = {} # list containing votes sum the country
         self.Cpresident = {} # Created for dicionary the president
         self.candidates = [] #The list containig candidates
         self.country = [] #List containing votes the country
@@ -37,8 +37,11 @@ class Brazil:
               'President_two': valid_votes_two
          }
 
-    def test(self, country, e) :
-         self.voteCountry[country] = e
+    def count(self, votes, votes_country_president1, votes_country_president2):
+         self.voteCountry[votes] = {
+              'total votes president 1': votes_country_president1,
+              'total votes president 2': votes_country_president2
+         }
 
     def __str__(self):
         state_info = '\n'.join(
@@ -53,14 +56,17 @@ class Brazil:
             f'The candidate for president: {value["President_One"]} and {value["President_two"]}'
             for key, value in self.Cpresident.items()
             )
+        votes_country = '\n'.join(
+             f'Vote the canditate 1 {value['total votes president 1']: .6f}; Vote the canditate 2: {value['total votes president 2']}'
+             for key, value in self.voteCountry.items()
+        )
 
-        return f"{state_info}\n\n{test_info}\n\n{president_info}"
+        return f"{state_info}\n\n{test_info}\n\n{president_info}\n\n{votes_country}"
 
 
 if __name__ == '__main__':
     brasil = Brazil()
-    n = 1
-    t = 0
+    n = 2
 
     for i in range(n):
         state = str(input('What is your state: '))
@@ -78,22 +84,17 @@ if __name__ == '__main__':
         brasil.country.append(valid_votes)
         brasil.country.append(valid_votes_two)
 
-
-        for c in brasil.country:
-             t += c
-             print(f'test {t}')
-        
-
-       
-
-
         president_one = random.choice(candidate)
         president_two = random.choice(candidate)
+
+        votes_country_president1 = sum(info['President'] for info in brasil.VoteElection.values())
+        votes_country_president2 = sum(info['President_two'] for info in brasil.VoteElection.values())
       
 
         brasil.add_states(state, population, vote, candidate )
         brasil.Election(state, valid_votes, valid_votes_two)
-        brasil.test('test votes', t)
+        brasil.count("", votes_country_president1, votes_country_president2)
+        # brasil.test('test votes', t)
        
 
 
@@ -101,6 +102,10 @@ if __name__ == '__main__':
              president_one, president_two = random.sample(brasil.candidates, 2)
              brasil.presidented('Candidate choosing', president_one, president_two)
         
+
+        
+
+      
 
     print('Info of states:')
     print(brasil)
