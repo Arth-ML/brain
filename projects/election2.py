@@ -102,10 +102,5 @@ if __name__ == '__main__':
              president_one, president_two = random.sample(brasil.candidates, 2)
              brasil.presidented('Candidate choosing', president_one, president_two)
         
-
-        
-
-      
-
     print('Info of states:')
     print(brasil)

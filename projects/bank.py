@@ -23,6 +23,7 @@ class Bank():
         self.deposit = {} #keep the customer´s deposit
         self.exit = {} #Valu retied
         self.currency = {} #Currency Convertion
+        self.financing = {} #financing
 
 
 
@@ -53,8 +54,25 @@ class Bank():
         }
         else:
             print('Thanks')
-   
-    
+
+#Financing house and car, age limits == 40 age; not financing salary > 4%
+
+    def finance(self, name, car, house, limits):
+        question = str(input('What you want finance [HOUSE/CAR]? '))
+
+        if question == 'House': 
+            house_price = float(input('whicht price of house? '))
+
+            if house_price > (4/100) * limits: #limits => value + balance
+                ioan = random.uniform(100.000, 1000.0000)
+                descont = house_price - ioan
+                if  descont == 0:
+                    print('paid of')
+                else:
+                    installments = int(input('In how many installments: '))
+                    
+
+        
 
     def __str__(self):
         info_people = '\n'.join(
